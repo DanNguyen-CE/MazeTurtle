@@ -7,7 +7,7 @@ A maze generation and solving visualizer using Python's [``Turtle``](https://doc
 ## Configuration
 There are a few input parameters for maze generation
 ```
-python maze_generator.py 300, 300, 10, 0, true
+python mazeturtle 300, 300, 10, 0, true
 ```
 Main takes 5 arguments: (int) ``length``, (int) ``height``, (int) ``scale``, (int) ``speed``, (bool) ``solve``
 
