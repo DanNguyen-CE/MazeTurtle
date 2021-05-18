@@ -27,7 +27,8 @@ def dfs_generator(self, v:int, visited:list, road_used:list, parent:int):
             visited[v] = True
 
         # Turtle draws toward current vertex
-        self.turtle.goto(((v % self.rows)-.5*self.rows)*self.scale,((v // self.rows)-.5*self.columns) * self.scale)
+        self.turtle.goto(((v % self.rows) - 0.5 * self.rows) * self.scale,
+                        ((v // self.rows) - 0.5 * self.columns) * self.scale)
         
         # Track the current edge
         road_used.append([parent, v])
@@ -49,7 +50,7 @@ def it_dfs_generator(self, s):
         self (Maze): maze class
         s (int): starting vertex
     '''
-    visited = [False]*self.total
+    visited = [False] * self.total
     road_used = []
     parent = -1
     stack = [s]
@@ -63,7 +64,8 @@ def it_dfs_generator(self, s):
         stack.pop()
 
         # Turtle draws toward current vertex
-        self.turtle.goto(((v % self.rows)-.5*self.rows)*self.scale,((v // self.rows)-.5*self.columns) * self.scale)
+        self.turtle.goto(((v % self.rows) - 0.5 * self.rows) * self.scale,
+                        ((v // self.rows) - 0.5 * self.columns) * self.scale)
 
         # Add edge to graph representation of maze
         if parent != -1 and not visited[v]:

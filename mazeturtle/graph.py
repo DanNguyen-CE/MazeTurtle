@@ -3,6 +3,9 @@ class Graph():
         self.vertex_count = 0
         self.graph = {}
 
+    def __getattribute__(self, attr):
+        return super(Graph, self).__getattribute__(attr)
+
     def add_vertex(self, v):
         if v not in self.graph:
             self.graph[v] = []
@@ -15,6 +18,3 @@ class Graph():
             self.add_vertex(w)
 
         self.graph[v].append(w)
-
-    def print(self):
-        print(self.graph)

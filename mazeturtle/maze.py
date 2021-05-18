@@ -25,9 +25,9 @@ class Maze():
             )
             sys.exit()
 
-        self.columns = height//self.scale
-        self.rows = length//self.scale
-        self.total = self.rows*self.columns
+        self.columns = height // self.scale
+        self.rows = length // self.scale
+        self.total = self.rows * self.columns
 
         print(f'\n{colors.OK_CYAN}Maze Size: {self.rows}x{self.columns} -- '
             f'Draw Speed: {self.speed}{colors.END}')
@@ -65,15 +65,19 @@ class Maze():
     def turtle_set(self):
         self.window.bgcolor('#%02x%02x%02x' % (44, 52, 66))
         self.turtle.speed(self.speed)
-        self.turtle.pensize(self.scale-(self.scale*.2))
+        self.turtle.pensize(self.scale * 0.8)
         self.turtle.shape('circle')
         self.turtle.color('yellow')
         self.turtle.pencolor('white')
         self.turtle.up()
-        self.turtle.goto((-.5*self.rows)*self.scale,(-.5*self.columns)*self.scale)
+        self.turtle.goto((-0.5 * self.rows) * self.scale,
+                        (-0.5 * self.columns) * self.scale)
         self.turtle.pendown()
 
     def generate(self):
+        '''
+        Generates maze using DFS algorithm implemented in generators.py
+        '''
         print(f'{colors.OK_GREEN}Generating Maze using randomized DFS w/ backtracking...{colors.END}')
 
         if self.rows > 20 or self.columns > 20:
@@ -86,23 +90,34 @@ class Maze():
         dfs_generator(self, 0, visited, road_used, -1)
 
     def solve(self):
-        print(f'{colors.OK_GREEN}Solving Maze using BFS...{colors.END}')
-        self.draw_path(bfs_solver(self, 0, self.total - 1), 'Red')
+        '''
+        Generates maze using BFS algorithm implemented in solvers.py
+        '''
+        self.turtle.pensize(0)
+        self.turtle.pencolor('Blue')
+        self.turtle.up()
+        self.turtle.goto((-0.5 * self.rows) * self.scale, (-0.5 * self.columns) * self.scale)
+        self.turtle.down()
+
+        print(f'{colors.OK_GREEN}Solving Maze using shortest path BFS...{colors.END}')
+        self.draw_path(bfs_solver(self, 0, self.total - 1), 'red')
 
     def mark_ends(self):
         self.turtle.ht()
-        self.turtle.pensize(self.scale*.6)
+        self.turtle.pensize(self.scale * 0.6)
         self.turtle.up()
-        self.turtle.goto((-.5*self.rows)*self.scale,(-.5*self.columns)*self.scale)
+        self.turtle.goto((-0.5 * self.rows) * self.scale,
+                        (-0.5 * self.columns) * self.scale)
         self.turtle.down()
         self.turtle.seth(180)
-        self.turtle.color("green")
+        self.turtle.color('green')
         self.turtle.forward(self.scale)
         self.turtle.up()
-        path= self.grid[self.rows-1][self.columns-1]
-        self.turtle.goto(((path % self.rows)-.5*self.rows)*self.scale,((path // self.rows)-.5*self.columns) * self.scale)
+        path= self.grid[self.rows - 1][self.columns - 1]
+        self.turtle.goto(((path % self.rows) - 0.5 * self.rows) * self.scale, 
+                        ((path // self.rows) - 0.5 * self.columns) * self.scale)
         self.turtle.down()
-        self.turtle.color("red")
+        self.turtle.color('red')
         self.turtle.seth(0)
         self.turtle.forward(self.scale)
         self.turtle.up()
@@ -113,9 +128,9 @@ class Maze():
         self.turtle.pensize(self.scale * 0.4)
         self.turtle.pencolor(color)
         self.turtle.up()
-        self.turtle.goto((-.5 * self.rows) * self.scale, (-.5 * self.columns) * self.scale)
+        self.turtle.goto((-0.5 * self.rows) * self.scale, (-0.5 * self.columns) * self.scale)
         self.turtle.pendown()
 
         for v in path:
-            self.turtle.goto(((v % self.rows) - .5 * self.rows) * self.scale,
-                             ((v // self.rows) - .5 * self.columns) * self.scale)
+            self.turtle.goto(((v % self.rows) - 0.5 * self.rows) * self.scale,
+                             ((v // self.rows) - 0.5 * self.columns) * self.scale)
